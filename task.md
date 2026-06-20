@@ -415,15 +415,13 @@ KaiKaa/
 - **DoD:** login สำเร็จเข้าหน้าหลัก · ปิดแอปเปิดใหม่ยัง login อยู่ (load จาก storage) · token หมดอายุ/401 เด้งกลับ Login อัตโนมัติ (interceptor → setUnauthorizedHandler)
   - ⚠️ verify ด้วย `tsc` (0 errors) — รัน emulator จริงไว้ทำตอน screens ครบ (T14)
 
-### T09 · Bottom Navigation
-- [ ] Bottom Tab Navigator 5 แท็บ:
-  - 🏠 หน้าหลัก (Dashboard)
-  - 📊 รายงาน (Reports)
-  - ＋ ขาย (POS) — FAB กลาง สูงกว่าแท็บอื่น
-  - ✨ AI สรุป
-  - ⊞ รวม (Hub)
-- [ ] Active tab เปลี่ยนสีเป็น `#b06a43`
+### T09 · Bottom Navigation ✅ (tsc ผ่าน)
+- [x] Bottom Tab Navigator 5 แท็บ (custom `TabBar`): Dashboard / Reports / Sales / AI / Hub
+- [x] ปุ่ม ＋ ขาย กลาง — วงกลมน้ำตาลยกสูง (translateY -14 + shadow)
+- [x] Active tab สี `#b06a43`, inactive `#c3b3a2` · ไอคอน SVG (react-native-svg)
+- [x] `NavigationContainer` + `MainTabs` + 5 placeholder screens · Hub มี shortcut + logout
 - **DoD:** สลับครบ 5 แท็บไม่ค้าง · ปุ่ม ＋ กลางเด่นกว่าแท็บอื่น · แท็บ active สีถูกต้อง
+  - ⚠️ verify ด้วย `tsc` (0 errors) — รัน emulator จริงไว้ทำตอน screens ครบ
 
 ### T10 · Dashboard Screen
 - [ ] เรียก `GET /api/v1/reports/daily?date=today`
@@ -484,7 +482,7 @@ KaiKaa/
 | T06 | AI Summary API | Backend | ✅ |
 | T07 | Project Setup + Template | Mobile | ✅ |
 | T08 | Auth (Login / Register) | Mobile | ✅ |
-| T09 | Bottom Navigation | Mobile | ⬜ |
+| T09 | Bottom Navigation | Mobile | ✅ |
 | T10 | Dashboard Screen | Mobile | ⬜ |
 | T11 | Sales / POS Screen | Mobile | ⬜ |
 | T12 | Products Screen | Mobile | ⬜ |
