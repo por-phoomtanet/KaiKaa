@@ -360,24 +360,20 @@ KaiKaa/
 
 ## MOBILE — React Native
 
-### T07 · Project Setup
-- [ ] Init React Native project (`KaiKaaApp`)
-- [ ] ติดตั้ง dependencies:
-  - `@react-navigation/native` + `@react-navigation/bottom-tabs`
-  - `axios`
-  - `@react-native-async-storage/async-storage` (เก็บ JWT)
-  - `react-native-toast-message`
-  - `react-native-chart-kit` (bar chart)
-  - `@gorhom/bottom-sheet` (Bottom Sheet)
-  - `react-native-safe-area-context`
-- [ ] ตั้งค่า theme: สี `#b06a43` / `#f7efe4`, ฟอนต์ Anuphan
+### T07 · Project Setup ✅ (tsc ผ่าน)
+- [x] Init React Native project (scaffold + Node 24)
+- [x] ติดตั้ง dependencies (navigation, axios, async-storage, toast, chart, bottom-sheet, safe-area)
+- [x] ตั้งค่า theme: สี `#b06a43` / `#f7efe4`, ฟอนต์ Anuphan (`src/theme/index.ts`)
+- [x] **API layer (T00c):** `src/config.ts`, `src/api/` (types, storage, client + JWT/401 interceptor, auth/products/sales/reports/ai services)
+- [x] **useApi hook (T00d):** `src/hooks/useApi.ts` + `LoadingScreen` + `ErrorScreen`
+- **DoD:** `npx tsc --noEmit` ผ่าน (0 errors) · รันแอปจริงต้องมี emulator (ไว้ทำตอนมี screens)
 
-### T07b · Frontend Template (Design System)
+### T07b · Frontend Template (Design System) ✅ (tsc ผ่าน)
 
 > อิงจาก prototype `Sales Tracker AI Warm (standalone).html`
 
 **Theme Tokens** — `src/theme/index.ts`
-- [ ] Colors:
+- [x] Colors:
   ```
   primary:    #b06a43   (กาแฟน้ำตาล — header, button, active)
   background: #f7efe4   (ครีมอุ่น — พื้นหลังหลัก)
@@ -388,28 +384,26 @@ KaiKaa/
   cash:       #2f9e6b   (เงินสด — สีเขียว)
   transfer:   #3b6fe0   (โอนเงิน — สีน้ำเงิน)
   ```
-- [ ] Typography: ฟอนต์ Anuphan, ขนาด 11 / 12 / 13 / 14 / 15 / 17 / 19 / 22 / 26 / 34
-- [ ] Spacing / Border Radius: radius 9 / 12 / 18 / 20 / 24 / 32
+- [x] Typography: ฟอนต์ Anuphan, ขนาด 11 / 12 / 13 / 14 / 15 / 17 / 19 / 22 / 26 / 34
+- [x] Spacing / Border Radius: radius 9 / 12 / 18 / 20 / 24 / 32
 
 **Reusable Components** — `src/components/`
-- [ ] `StatusBar` — สีน้ำตาล, แสดงเวลา + ไอคอนแบตเตอรี่/สัญญาณ
-- [ ] `HeaderBar` — พื้นหลัง primary, title + subtitle + optional back button
-- [ ] `Card` — ขอบมน, border `#efe3d4`, shadow เบา
-- [ ] `ProgressBar` — height 4–5px, rounded, รองรับสี primary / cash / transfer
-- [ ] `EmojiAvatar` — กล่องสี่เหลี่ยมมน แสดง emoji (ขนาด 30–54px)
-- [ ] `PrimaryButton` — พื้นหลัง primary, สีขาว, กด scale(.97)
-- [ ] `GhostButton` — border only, ใช้สำหรับ secondary action
-- [ ] `BottomSheet` — slide up animation, มี drag handle, dim overlay
-  - `PaymentSheet` — 2 ปุ่ม เงินสด / โอนเงิน
-  - `ProductEditorSheet` — form ชื่อ + ราคา + emoji picker
-- [ ] `Toast` — bottom center, พื้นหลัง `#4a3526`, มี ✓ icon, auto dismiss 2s
-- [ ] `BarChart` — custom bar chart อิง prototype (ไม่ต้องใช้ library ถ้าทำได้)
-- [ ] `TabSwitch` — 2 ปุ่ม สลับ tab (เช่น รายวัน/รายเดือน), พื้นหลัง rgba
+- [x] `HeaderBar` — พื้นหลัง primary, title + subtitle + optional back button
+- [x] `Card` — ขอบมน, border `#efe3d4`
+- [x] `ProgressBar` — rounded, รองรับสี primary / cash / transfer
+- [x] `EmojiAvatar` — กล่องสี่เหลี่ยมมน แสดง emoji (ปรับ size ได้)
+- [x] `PrimaryButton` — พื้นหลัง primary, กด scale
+- [x] `GhostButton` — border only, secondary action
+- [x] `BottomSheet` — slide up (RN Modal) + drag handle + dim overlay (generic; PaymentSheet/ProductEditorSheet ประกอบตอน T11/T12)
+- [x] `Toast` — bottom center, พื้นหลัง `#4a3526`, ✓ icon (auto-dismiss คุมที่ screen)
+- [x] `BarChart` — custom bar chart (View ล้วน ไม่พึ่ง library)
+- [x] `TabSwitch` — สลับ tab, พื้นหลัง rgba
+- ~~`StatusBar`~~ — ข้าม (เป็นแค่ mockup ใน prototype; อุปกรณ์จริงมี status bar ของระบบเอง)
 
 **Layout Templates**
-- [ ] `ScreenWrapper` — SafeAreaView + background `#f7efe4`
-- [ ] `SectionTitle` — ข้อความ section (font 15, bold, `#4a3526`)
-- [ ] `Divider` — เส้น `#f3ebe0` ความสูง 1px
+- [x] `ScreenWrapper` — SafeAreaView + background `#f7efe4`
+- [x] `SectionTitle` — ข้อความ section
+- [x] `Divider` — เส้น `#f3ebe0` ความสูง 1px
 
 ### T08 · Auth
 - [ ] `LoginScreen` — form email + password, เรียก `/api/auth/login`
@@ -486,7 +480,7 @@ KaiKaa/
 | T04 | Sales API | Backend | ✅ |
 | T05 | Reports API | Backend | ✅ |
 | T06 | AI Summary API | Backend | ✅ |
-| T07 | Project Setup (Mobile) | Mobile | ⬜ |
+| T07 | Project Setup + Template | Mobile | ✅ |
 | T08 | Auth (Login / Register) | Mobile | ⬜ |
 | T09 | Bottom Navigation | Mobile | ⬜ |
 | T10 | Dashboard Screen | Mobile | ⬜ |
