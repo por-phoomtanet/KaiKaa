@@ -451,17 +451,13 @@ KaiKaa/
 - **DoD:** เพิ่ม/แก้/ลบแล้ว list อัปเดตทันที (`refetch`) · ลบมี confirm ก่อน · ชื่อว่าง/ราคาไม่ใช่ตัวเลข กดบันทึกไม่ได้ (validation)
   - ⚠️ verify ด้วย `tsc` (0 errors) — รัน emulator จริงไว้ทำตอน screens ครบ
 
-### T13 · Reports Screen
-- [ ] Tab สลับ รายวัน / รายเดือน
-- [ ] **รายวัน:**
-  - ยอดขายวันนี้
-  - Bar chart 7 วัน
-  - รายการล่าสุด 6 รายการ (emoji, ชื่อ, เวลา, ยอด, วิธีชำระ)
-- [ ] **รายเดือน:**
-  - ยอดขายเดือนนี้
-  - Bar chart แบ่ง 4 สัปดาห์
-  - สถิติ: ยอดเฉลี่ยต่อวัน / จำนวนบิล / ยอดเฉลี่ยต่อบิล
+### T13 · Reports Screen ✅ (tsc ผ่าน)
+- [x] Tab สลับ รายวัน / รายเดือน (`TabSwitch` บน header)
+- [x] **รายวัน:** ยอดวันนี้ + `BarChart` 7 วัน (highlight วันนี้) + รายการล่าสุด 6 (emoji/ชื่อ/เวลา/ยอด/วิธีชำระสี)
+- [x] **รายเดือน:** ยอดเดือน + `BarChart` 4 สัปดาห์ (topLabel ยอด) + สถิติ เฉลี่ยต่อวัน/จำนวนบิล/เฉลี่ยต่อบิล
+- [x] refresh-on-focus (refetch ทั้ง daily+monthly)
 - **DoD:** สลับ tab แล้วข้อมูลเปลี่ยนถูก · bar chart สูงสัมพันธ์กับค่าจริง · เงินสด=เขียว โอน=น้ำเงิน ตรง theme
+  - ⚠️ verify ด้วย `tsc` (0 errors) — รัน emulator จริงไว้ทำตอน screens ครบ
 
 ### T14 · AI Summary Screen
 - [ ] ปุ่ม "สรุปวันนี้" → เรียก `POST /api/v1/ai/summary`
@@ -490,7 +486,7 @@ KaiKaa/
 | T10 | Dashboard Screen | Mobile | ✅ |
 | T11 | Sales / POS Screen | Mobile | ✅ |
 | T12 | Products Screen | Mobile | ✅ |
-| T13 | Reports Screen | Mobile | ⬜ |
+| T13 | Reports Screen | Mobile | ✅ |
 | T14 | AI Summary Screen | Mobile | ⬜ |
 
 ---
