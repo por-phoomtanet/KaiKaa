@@ -423,12 +423,14 @@ KaiKaa/
 - **DoD:** สลับครบ 5 แท็บไม่ค้าง · ปุ่ม ＋ กลางเด่นกว่าแท็บอื่น · แท็บ active สีถูกต้อง
   - ⚠️ verify ด้วย `tsc` (0 errors) — รัน emulator จริงไว้ทำตอน screens ครบ
 
-### T10 · Dashboard Screen
-- [ ] เรียก `GET /api/v1/reports/daily?date=today`
-- [ ] แสดงยอดขายวันนี้ (ตัวเลขใหญ่ + badge % เปลี่ยนแปลง)
-- [ ] Card เงินสด vs โอนเงิน (% + progress bar)
-- [ ] รายการ Top 4 สินค้าขายดี (emoji + ชื่อ + จำนวน + ยอด + progress bar)
+### T10 · Dashboard Screen ✅ (tsc ผ่าน)
+- [x] เรียก `reportApi.dailyReport()` ผ่าน `useApi`
+- [x] แสดงยอดขายวันนี้ (ตัวเลขใหญ่ + badge ▲/▼ % เปลี่ยนแปลง + จำนวนรายการ)
+- [x] Card เงินสด vs โอนเงิน (% + progress bar สีเขียว/น้ำเงิน)
+- [x] รายการ Top 4 สินค้าขายดี (emoji + ชื่อ + progress + ยอด + จำนวน) + empty state
+- [x] refresh-on-focus (`useFocusEffect`) — ขายเสร็จกลับมายอดอัปเดต
 - **DoD:** ตัวเลขตรงกับ API · ใช้ `useApi` ครบ loading/error/retry (T00d) · ขายสินค้าเสร็จกลับมาหน้านี้ยอดอัปเดต · ร้านยังไม่มีข้อมูลแสดง empty state ไม่ค้าง spinner
+  - ⚠️ verify ด้วย `tsc` (0 errors) — รัน emulator จริงไว้ทำตอน screens ครบ
 
 ### T11 · Sales / POS Screen
 - [ ] เรียก `GET /api/v1/products` แสดง Grid 2 คอลัมน์
@@ -483,7 +485,7 @@ KaiKaa/
 | T07 | Project Setup + Template | Mobile | ✅ |
 | T08 | Auth (Login / Register) | Mobile | ✅ |
 | T09 | Bottom Navigation | Mobile | ✅ |
-| T10 | Dashboard Screen | Mobile | ⬜ |
+| T10 | Dashboard Screen | Mobile | ✅ |
 | T11 | Sales / POS Screen | Mobile | ⬜ |
 | T12 | Products Screen | Mobile | ⬜ |
 | T13 | Reports Screen | Mobile | ⬜ |
