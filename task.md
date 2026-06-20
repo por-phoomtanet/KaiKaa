@@ -459,14 +459,13 @@ KaiKaa/
 - **DoD:** สลับ tab แล้วข้อมูลเปลี่ยนถูก · bar chart สูงสัมพันธ์กับค่าจริง · เงินสด=เขียว โอน=น้ำเงิน ตรง theme
   - ⚠️ verify ด้วย `tsc` (0 errors) — รัน emulator จริงไว้ทำตอน screens ครบ
 
-### T14 · AI Summary Screen
-- [ ] ปุ่ม "สรุปวันนี้" → เรียก `POST /api/v1/ai/summary`
-- [ ] แสดง Loading state ระหว่างรอ AI
-- [ ] แสดงผล 3 การ์ด:
-  - 📈 สรุปยอดขายวันนี้
-  - ⭐ สินค้าขายดี Top 3
-  - 💡 คำแนะนำ 3 ข้อ
+### T14 · AI Summary Screen ✅ (tsc ผ่าน)
+- [x] ปุ่ม "✨ สรุปวันนี้" → `aiApi.aiSummary()` (กดเอง ไม่ auto-fetch)
+- [x] Loading state (spinner + "AI กำลังวิเคราะห์...") ระหว่างรอ
+- [x] แสดงผล 3 การ์ด: 📈 สรุป · ⭐ สินค้าขายดี · 💡 คำแนะนำ (การ์ดน้ำตาล) + ปุ่มสรุปใหม่
+- [x] error → ข้อความ + ปุ่มลองใหม่ · กัน double-submit
 - **DoD:** กดแล้วเห็น loading ระหว่างรอ · ผลแสดงครบ 3 การ์ด · AI error แสดงข้อความ + ปุ่มลองใหม่ ไม่ค้าง loading
+  - ⚠️ verify ด้วย `tsc` (0 errors) · ต้องมี `OPENROUTER_KEY` ใน `.env` ถึงจะได้ผลจริง
 
 ---
 
@@ -487,7 +486,7 @@ KaiKaa/
 | T11 | Sales / POS Screen | Mobile | ✅ |
 | T12 | Products Screen | Mobile | ✅ |
 | T13 | Reports Screen | Mobile | ✅ |
-| T14 | AI Summary Screen | Mobile | ⬜ |
+| T14 | AI Summary Screen | Mobile | ✅ |
 
 ---
 
