@@ -14,5 +14,6 @@ export { BarChart } from './BarChart';
 export type { Bar } from './BarChart';
 export { BottomSheet } from './BottomSheet';
 export { PaymentSheet } from './PaymentSheet';
+export { ProductEditorSheet } from './ProductEditorSheet';
 export { LoadingScreen } from './LoadingScreen';
 export { ErrorScreen } from './ErrorScreen';

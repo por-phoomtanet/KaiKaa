@@ -34,6 +34,10 @@ export const TabBar: React.FC<BottomTabBarProps> = ({ state, navigation }) => {
   return (
     <View style={[styles.bar, { paddingBottom: Math.max(insets.bottom, 12) }]}>
       {state.routes.map((route, index) => {
+        // Products เป็นหน้าในระบบนำทาง แต่ไม่แสดงปุ่มใน tab bar
+        if (route.name === 'Products') {
+          return null;
+        }
         const focused = state.index === index;
         const onPress = () => {
           const event = navigation.emit({

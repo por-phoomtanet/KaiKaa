@@ -442,13 +442,14 @@ KaiKaa/
 - **DoD:** กดขายแล้ว record เข้า DB จริง · Toast เด้งหายเองใน 2s · กดรัวๆ ไม่ยิงซ้ำ · sheet ปิดหลังขายเสร็จ
   - ⚠️ verify ด้วย `tsc` (0 errors) — รัน emulator จริงไว้ทำตอน screens ครบ
 
-### T12 · Products Screen
-- [ ] เรียก `GET /api/v1/products` แสดงเป็น List (emoji + ชื่อ + ราคา)
-- [ ] ปุ่ม "เพิ่มสินค้า" → Bottom Sheet กรอกชื่อ + ราคา + emoji
-  - เรียก `POST /api/v1/products`
-- [ ] ปุ่ม ✎ แก้ไข → Bottom Sheet แก้ไข → เรียก `PUT /api/v1/products/:id`
-- [ ] ปุ่ม 🗑 ลบ → confirm แล้วเรียก `DELETE /api/v1/products/:id`
-- **DoD:** เพิ่ม/แก้/ลบแล้ว list อัปเดตทันที · ลบมี confirm ก่อน · ชื่อว่าง/ราคาไม่ใช่ตัวเลข กดบันทึกไม่ได้
+### T12 · Products Screen ✅ (tsc ผ่าน)
+- [x] เรียก `productApi.listProducts()` แสดงเป็น List (emoji + ชื่อ + ราคา) + empty state
+- [x] ปุ่ม "เพิ่มสินค้า" (FAB) → `ProductEditorSheet` → `createProduct`
+- [x] ปุ่ม ✎ แก้ไข → `ProductEditorSheet` (prefilled) → `updateProduct`
+- [x] ปุ่ม 🗑 ลบ → `Alert.alert` confirm → `deleteProduct`
+- [x] routing: Products ซ่อนจาก tab bar, เข้าจาก Hub, มีปุ่ม back → Hub
+- **DoD:** เพิ่ม/แก้/ลบแล้ว list อัปเดตทันที (`refetch`) · ลบมี confirm ก่อน · ชื่อว่าง/ราคาไม่ใช่ตัวเลข กดบันทึกไม่ได้ (validation)
+  - ⚠️ verify ด้วย `tsc` (0 errors) — รัน emulator จริงไว้ทำตอน screens ครบ
 
 ### T13 · Reports Screen
 - [ ] Tab สลับ รายวัน / รายเดือน
@@ -488,7 +489,7 @@ KaiKaa/
 | T09 | Bottom Navigation | Mobile | ✅ |
 | T10 | Dashboard Screen | Mobile | ✅ |
 | T11 | Sales / POS Screen | Mobile | ✅ |
-| T12 | Products Screen | Mobile | ⬜ |
+| T12 | Products Screen | Mobile | ✅ |
 | T13 | Reports Screen | Mobile | ⬜ |
 | T14 | AI Summary Screen | Mobile | ⬜ |
 

@@ -19,6 +19,7 @@ interface Shortcut {
 const shortcuts: Shortcut[] = [
   { label: 'หน้าหลัก', emoji: '🏠', bg: '#f3e2d3', target: 'Dashboard' },
   { label: 'ขายสินค้า', emoji: '🛒', bg: '#e8f5ee', target: 'Sales' },
+  { label: 'สินค้า', emoji: '🧋', bg: '#eaf0fd', target: 'Products' },
   { label: 'รายงาน', emoji: '📊', bg: '#fbe8df', target: 'Reports' },
   { label: 'AI สรุป', emoji: '✨', bg: '#f3e7d0', target: 'AI' },
 ];

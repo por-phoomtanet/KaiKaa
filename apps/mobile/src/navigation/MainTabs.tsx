@@ -7,6 +7,7 @@ import { ReportsScreen } from '../screens/ReportsScreen';
 import { SalesScreen } from '../screens/SalesScreen';
 import { AiScreen } from '../screens/AiScreen';
 import { HubScreen } from '../screens/HubScreen';
+import { ProductsScreen } from '../screens/ProductsScreen';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
@@ -20,5 +21,7 @@ export const MainTabs: React.FC = () => (
     <Tab.Screen name="Sales" component={SalesScreen} />
     <Tab.Screen name="AI" component={AiScreen} />
     <Tab.Screen name="Hub" component={HubScreen} />
+    {/* ซ่อนจาก tab bar (กรองใน TabBar) — เข้าจาก Hub */}
+    <Tab.Screen name="Products" component={ProductsScreen} />
   </Tab.Navigator>
 );
