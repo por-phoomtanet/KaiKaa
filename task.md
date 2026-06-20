@@ -432,14 +432,15 @@ KaiKaa/
 - **DoD:** ตัวเลขตรงกับ API · ใช้ `useApi` ครบ loading/error/retry (T00d) · ขายสินค้าเสร็จกลับมาหน้านี้ยอดอัปเดต · ร้านยังไม่มีข้อมูลแสดง empty state ไม่ค้าง spinner
   - ⚠️ verify ด้วย `tsc` (0 errors) — รัน emulator จริงไว้ทำตอน screens ครบ
 
-### T11 · Sales / POS Screen
-- [ ] เรียก `GET /api/v1/products` แสดง Grid 2 คอลัมน์
-- [ ] กดสินค้า → เปิด Bottom Sheet เลือกชำระเงิน
-  - ปุ่ม "เงินสด" → เรียก `POST /api/v1/sales` (method: cash)
-  - ปุ่ม "โอนเงิน" → เรียก `POST /api/v1/sales` (method: transfer)
-- [ ] Toast notification หลังบันทึกสำเร็จ
-- [ ] Refresh Dashboard หลังขายสำเร็จ
-- **DoD:** กดขายแล้ว record เข้า DB จริง · Toast เด้งหายเองใน 2s · กดรัวๆ ไม่ยิงซ้ำ (กัน double submit) · sheet ปิดหลังขายเสร็จ
+### T11 · Sales / POS Screen ✅ (tsc ผ่าน)
+- [x] เรียก `productApi.listProducts()` แสดง Grid 2 คอลัมน์ (+ empty state)
+- [x] กดสินค้า → เปิด `PaymentSheet` (BottomSheet) เลือกชำระเงิน
+  - ปุ่ม "เงินสด" / "โอนเงิน" → `saleApi.createSale({product_id, method})`
+- [x] Toast notification หลังบันทึกสำเร็จ (auto-dismiss 2s ผ่าน `useToast`)
+- [x] Refresh Dashboard หลังขาย — ทำผ่าน refresh-on-focus ใน T10
+- [x] กัน double-submit (`submitting` guard) + ปิด sheet หลังขายเสร็จ + แสดง error เป็น toast
+- **DoD:** กดขายแล้ว record เข้า DB จริง · Toast เด้งหายเองใน 2s · กดรัวๆ ไม่ยิงซ้ำ · sheet ปิดหลังขายเสร็จ
+  - ⚠️ verify ด้วย `tsc` (0 errors) — รัน emulator จริงไว้ทำตอน screens ครบ
 
 ### T12 · Products Screen
 - [ ] เรียก `GET /api/v1/products` แสดงเป็น List (emoji + ชื่อ + ราคา)
@@ -486,7 +487,7 @@ KaiKaa/
 | T08 | Auth (Login / Register) | Mobile | ✅ |
 | T09 | Bottom Navigation | Mobile | ✅ |
 | T10 | Dashboard Screen | Mobile | ✅ |
-| T11 | Sales / POS Screen | Mobile | ⬜ |
+| T11 | Sales / POS Screen | Mobile | ✅ |
 | T12 | Products Screen | Mobile | ⬜ |
 | T13 | Reports Screen | Mobile | ⬜ |
 | T14 | AI Summary Screen | Mobile | ⬜ |

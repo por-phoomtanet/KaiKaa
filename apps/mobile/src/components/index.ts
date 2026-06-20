@@ -13,5 +13,6 @@ export { Toast } from './Toast';
 export { BarChart } from './BarChart';
 export type { Bar } from './BarChart';
 export { BottomSheet } from './BottomSheet';
+export { PaymentSheet } from './PaymentSheet';
 export { LoadingScreen } from './LoadingScreen';
 export { ErrorScreen } from './ErrorScreen';
