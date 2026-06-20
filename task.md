@@ -405,13 +405,15 @@ KaiKaa/
 - [x] `SectionTitle` — ข้อความ section
 - [x] `Divider` — เส้น `#f3ebe0` ความสูง 1px
 
-### T08 · Auth
-- [ ] `LoginScreen` — form email + password, เรียก `/api/auth/login`
-- [ ] `RegisterScreen` — form ชื่อร้าน + email + password, เรียก `/api/auth/register`
-- [ ] เก็บ JWT ใน AsyncStorage
-- [ ] Auth guard: redirect ไป Login ถ้าไม่มี token
-- [ ] Logout (ลบ token)
-- **DoD:** login สำเร็จเข้าหน้าหลัก · ปิดแอปเปิดใหม่ยัง login อยู่ (token persist) · token หมดอายุ/401 เด้งกลับ Login อัตโนมัติ
+### T08 · Auth ✅ (tsc ผ่าน)
+- [x] `LoginScreen` — form email + password, เรียก `/api/auth/login`
+- [x] `RegisterScreen` — form ชื่อร้าน + email + password, เรียก `/api/auth/register`
+- [x] เก็บ JWT (+ shop) ใน AsyncStorage
+- [x] Auth guard: `RootNavigator` + `AuthContext` — ไม่มี token → Login
+- [x] Logout (ลบ token+shop ผ่าน `signOut`)
+- [x] กัน double-submit, แสดง error จาก API, `TextField` component
+- **DoD:** login สำเร็จเข้าหน้าหลัก · ปิดแอปเปิดใหม่ยัง login อยู่ (load จาก storage) · token หมดอายุ/401 เด้งกลับ Login อัตโนมัติ (interceptor → setUnauthorizedHandler)
+  - ⚠️ verify ด้วย `tsc` (0 errors) — รัน emulator จริงไว้ทำตอน screens ครบ (T14)
 
 ### T09 · Bottom Navigation
 - [ ] Bottom Tab Navigator 5 แท็บ:
@@ -481,7 +483,7 @@ KaiKaa/
 | T05 | Reports API | Backend | ✅ |
 | T06 | AI Summary API | Backend | ✅ |
 | T07 | Project Setup + Template | Mobile | ✅ |
-| T08 | Auth (Login / Register) | Mobile | ⬜ |
+| T08 | Auth (Login / Register) | Mobile | ✅ |
 | T09 | Bottom Navigation | Mobile | ⬜ |
 | T10 | Dashboard Screen | Mobile | ⬜ |
 | T11 | Sales / POS Screen | Mobile | ⬜ |

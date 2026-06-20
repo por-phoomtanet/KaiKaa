@@ -8,6 +8,7 @@ export { GhostButton } from './GhostButton';
 export { SectionTitle } from './SectionTitle';
 export { Divider } from './Divider';
 export { TabSwitch } from './TabSwitch';
+export { TextField } from './TextField';
 export { Toast } from './Toast';
 export { BarChart } from './BarChart';
 export type { Bar } from './BarChart';

@@ -1,5 +1,5 @@
 import { apiClient, unwrap } from './client';
-import { setToken, clearToken } from './storage';
+import { setToken, setShop, clearToken, clearShop } from './storage';
 import { AuthData } from './types';
 
 export const register = async (body: {
@@ -9,6 +9,7 @@ export const register = async (body: {
 }): Promise<AuthData> => {
   const data = await unwrap<AuthData>(apiClient.post('/auth/register', body));
   await setToken(data.token);
+  await setShop(data.shop);
   return data;
 };
 
@@ -18,7 +19,11 @@ export const login = async (body: {
 }): Promise<AuthData> => {
   const data = await unwrap<AuthData>(apiClient.post('/auth/login', body));
   await setToken(data.token);
+  await setShop(data.shop);
   return data;
 };
 
-export const logout = () => clearToken();
+export const logout = async () => {
+  await clearToken();
+  await clearShop();
+};
