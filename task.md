@@ -306,12 +306,14 @@ KaiKaa/
   - ⚠️ **ยังไม่ verify** — เครื่องนี้ดึง image จาก Docker Hub ไม่ได้ (network EOF). ต้องรัน `docker compose up -d --build` แล้ว `curl localhost:8080/health` ยืนยันอีกครั้งเมื่อ network ใช้ได้
   - ⚠️ Mobile: เครื่องเป็น Node 16 ต้องอัปเป็น **Node 18+** ก่อน `npm install`
 
-### T02 · Auth API
-- [ ] Data model: `User` + `Shop`
-- [ ] `POST /api/auth/register` — สร้าง user + shop
-- [ ] `POST /api/auth/login` — ตรวจ password, คืน JWT
-- [ ] JWT middleware (ดึง shop_id จาก token สำหรับ route ที่ต้อง auth)
+### T02 · Auth API ✅ (verified)
+- [x] Data model: `User` + `Shop` (`internal/auth/model.go`)
+- [x] `POST /api/auth/register` — สร้าง user + shop
+- [x] `POST /api/auth/login` — ตรวจ password, คืน JWT
+- [x] JWT middleware (`internal/middleware/jwt.go` — set user_id/shop_id ลง context)
+- [x] เพิ่ม: `internal/response` (T00a), `internal/token` (jwt gen/parse), `GET /api/v1/me` (ทดสอบ auth)
 - **DoD:** register แล้วได้ token · login ด้วย password ผิดได้ 401 · เรียก `/api/v1/...` โดยไม่มี token ได้ 401 · password ถูก hash (bcrypt) ไม่เก็บ plain text
+  - ✅ **ผ่านครบ** — ทดสอบจริง: register 200, email ซ้ำ 409, login ผิด 401, login ถูก 200, /v1/me ไม่มี token 401, มี token 200, hash = `$2a$10$...` (bcrypt)
 
 ### T03 · Products API
 - [ ] Data model: `Product`
@@ -470,7 +472,7 @@ KaiKaa/
 | ID | งาน | ประเภท | สถานะ |
 |----|-----|--------|-------|
 | T01 | Project Setup (Backend) | Backend | ✅ (รอ verify) |
-| T02 | Auth API | Backend | ⬜ |
+| T02 | Auth API | Backend | ✅ |
 | T03 | Products API | Backend | ⬜ |
 | T04 | Sales API | Backend | ⬜ |
 | T05 | Reports API | Backend | ⬜ |
