@@ -325,11 +325,13 @@ KaiKaa/
 - **DoD:** CRUD ครบ คืน JSON ตรงตาม API Contract · เห็นเฉพาะสินค้าของ shop ตัวเอง (filter ด้วย shop_id จาก token) · แก้/ลบสินค้าร้านอื่นได้ 404
   - ✅ **ผ่านครบ** — HTTP จริง: create/list/update/delete 200, list ร้านอื่น `[]`, update/delete ร้านอื่น 404, name ว่าง 400, ไม่มี token 401
 
-### T04 · Sales API
-- [ ] Data model: `Sale`
-- [ ] `POST /api/v1/sales` — บันทึก transaction (product_id, method)
-- [ ] `GET /api/v1/sales?date=YYYY-MM-DD` — ดึง transaction ของวันที่ระบุ
+### T04 · Sales API ✅ (verified)
+- [x] Data model: `Sale` (`internal/sale/model.go` — snapshot ชื่อ/ราคา/emoji)
+- [x] `POST /api/v1/sales` — บันทึก transaction (product_id, method)
+- [x] `GET /api/v1/sales?date=YYYY-MM-DD` — ดึง transaction ของวันที่ระบุ
+- [x] Go tests: snapshot, cross-shop product, date filter, sort desc, invalid date (7 funcs)
 - **DoD:** ขายแล้ว server snapshot ราคา/ชื่อ/emoji + เติม `sold_at`/`time` เอง · `method` รับเฉพาะ `cash`/`transfer` (อื่นได้ 400) · query by date คืนเฉพาะวันนั้น
+  - ✅ **ผ่านครบ** — HTTP จริง: ขาย 200 (time เวลาไทย +7), method ผิด 400, product มั่ว 400, date default=วันนี้, วันไม่มีขาย `[]`, format ผิด 400, ไม่มี token 401
 
 ### T05 · Reports API
 - [ ] `GET /api/v1/reports/daily?date=YYYY-MM-DD`
@@ -476,7 +478,7 @@ KaiKaa/
 | T01 | Project Setup (Backend) | Backend | ✅ (รอ verify) |
 | T02 | Auth API | Backend | ✅ |
 | T03 | Products API | Backend | ✅ |
-| T04 | Sales API | Backend | ⬜ |
+| T04 | Sales API | Backend | ✅ |
 | T05 | Reports API | Backend | ⬜ |
 | T06 | AI Summary API | Backend | ⬜ |
 | T07 | Project Setup (Mobile) | Mobile | ⬜ |

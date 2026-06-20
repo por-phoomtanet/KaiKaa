@@ -10,6 +10,7 @@ import (
 	"github.com/kaikaa/api/internal/middleware"
 	"github.com/kaikaa/api/internal/product"
 	"github.com/kaikaa/api/internal/response"
+	"github.com/kaikaa/api/internal/sale"
 )
 
 func main() {
@@ -19,6 +20,7 @@ func main() {
 	// wire dependencies (handler ← service ← db)
 	authHandler := auth.NewHandler(auth.NewService(db, cfg.JWTSecret))
 	productHandler := product.NewHandler(product.NewService(db))
+	saleHandler := sale.NewHandler(sale.NewService(db))
 
 	r := gin.Default()
 
@@ -52,6 +54,10 @@ func main() {
 			v1.POST("/products", productHandler.Create)
 			v1.PUT("/products/:id", productHandler.Update)
 			v1.DELETE("/products/:id", productHandler.Delete)
+
+			// sales (T04)
+			v1.POST("/sales", saleHandler.Create)
+			v1.GET("/sales", saleHandler.List)
 		}
 	}
 
