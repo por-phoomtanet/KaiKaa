@@ -9,6 +9,7 @@ import (
 	"github.com/kaikaa/api/internal/auth"
 	"github.com/kaikaa/api/internal/middleware"
 	"github.com/kaikaa/api/internal/product"
+	"github.com/kaikaa/api/internal/report"
 	"github.com/kaikaa/api/internal/response"
 	"github.com/kaikaa/api/internal/sale"
 )
@@ -21,6 +22,7 @@ func main() {
 	authHandler := auth.NewHandler(auth.NewService(db, cfg.JWTSecret))
 	productHandler := product.NewHandler(product.NewService(db))
 	saleHandler := sale.NewHandler(sale.NewService(db))
+	reportHandler := report.NewHandler(report.NewService(db))
 
 	r := gin.Default()
 
@@ -58,6 +60,10 @@ func main() {
 			// sales (T04)
 			v1.POST("/sales", saleHandler.Create)
 			v1.GET("/sales", saleHandler.List)
+
+			// reports (T05)
+			v1.GET("/reports/daily", reportHandler.Daily)
+			v1.GET("/reports/monthly", reportHandler.Monthly)
 		}
 	}
 

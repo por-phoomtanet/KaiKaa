@@ -333,16 +333,18 @@ KaiKaa/
 - **DoD:** ขายแล้ว server snapshot ราคา/ชื่อ/emoji + เติม `sold_at`/`time` เอง · `method` รับเฉพาะ `cash`/`transfer` (อื่นได้ 400) · query by date คืนเฉพาะวันนั้น
   - ✅ **ผ่านครบ** — HTTP จริง: ขาย 200 (time เวลาไทย +7), method ผิด 400, product มั่ว 400, date default=วันนี้, วันไม่มีขาย `[]`, format ผิด 400, ไม่มี token 401
 
-### T05 · Reports API
-- [ ] `GET /api/v1/reports/daily?date=YYYY-MM-DD`
-  - ยอดรวม, จำนวน transaction, cash/transfer แยก
-  - Top 4 สินค้าขายดี
-  - ยอดขายย้อนหลัง 7 วัน (สำหรับ bar chart)
+### T05 · Reports API ✅ (verified)
+- [x] `GET /api/v1/reports/daily?date=YYYY-MM-DD`
+  - ยอดรวม, จำนวน transaction, cash/transfer แยก + change_pct (เทียบเฉลี่ย 6 วัน)
+  - Top 4 สินค้าขายดี (rank, qty, revenue, pct_width)
+  - ยอดขายย้อนหลัง 7 วัน (เติม 0 วันไม่มีขาย, label วันไทย)
   - รายการล่าสุด 6 รายการ
-- [ ] `GET /api/v1/reports/monthly?month=YYYY-MM`
+- [x] `GET /api/v1/reports/monthly?month=YYYY-MM`
   - ยอดรวมเดือน, แบ่งรายสัปดาห์ (4 สัปดาห์)
   - ยอดเฉลี่ยต่อวัน, จำนวนบิลรวม, ยอดเฉลี่ยต่อบิล
+- [x] Go tests: aggregation, week-fill, pct=100, recent cap 6, monthly buckets, empty, invalid (6 funcs)
 - **DoD:** response ตรงตาม API Contract ทุก key · `week_bars` ครบ 7 วัน (เติม 0 วันที่ไม่มีขาย) · `cash_pct + transfer_pct = 100` · วันไม่มีข้อมูลคืนค่า 0 ไม่ใช่ error
+  - ✅ **ผ่านครบ** — HTTP จริง: daily/monthly คืนทุก key, pct รวม 100, week_bars 7/4, วันว่าง zeros, date ผิด 400, no-token 401
 
 ### T06 · AI Summary API
 - [ ] `POST /api/v1/ai/summary`
@@ -479,7 +481,7 @@ KaiKaa/
 | T02 | Auth API | Backend | ✅ |
 | T03 | Products API | Backend | ✅ |
 | T04 | Sales API | Backend | ✅ |
-| T05 | Reports API | Backend | ⬜ |
+| T05 | Reports API | Backend | ✅ |
 | T06 | AI Summary API | Backend | ⬜ |
 | T07 | Project Setup (Mobile) | Mobile | ⬜ |
 | T08 | Auth (Login / Register) | Mobile | ⬜ |

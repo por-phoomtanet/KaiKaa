@@ -149,14 +149,17 @@ func TestListByDateSortedDesc(t *testing.T) {
 	db := newTestDB(t)
 	s := NewService(db)
 	shop := primitive.NewObjectID()
-	now := time.Now().UTC()
 
-	older := Sale{ID: primitive.NewObjectID(), ShopID: shop, ProductID: primitive.NewObjectID(), Name: "older", Total: 10, Method: "cash", SoldAt: now.Add(-2 * time.Hour)}
-	newer := Sale{ID: primitive.NewObjectID(), ShopID: shop, ProductID: primitive.NewObjectID(), Name: "newer", Total: 10, Method: "cash", SoldAt: now.Add(-1 * time.Hour)}
+	// anchor ที่เที่ยงวัน ICT ของวันนี้ กันคร่อมเส้นเที่ยงคืน (test เดิม flaky)
+	td := time.Now().In(ictLoc)
+	noon := time.Date(td.Year(), td.Month(), td.Day(), 12, 0, 0, 0, ictLoc)
+
+	older := Sale{ID: primitive.NewObjectID(), ShopID: shop, ProductID: primitive.NewObjectID(), Name: "older", Total: 10, Method: "cash", SoldAt: noon}
+	newer := Sale{ID: primitive.NewObjectID(), ShopID: shop, ProductID: primitive.NewObjectID(), Name: "newer", Total: 10, Method: "cash", SoldAt: noon.Add(time.Hour)}
 	_, _ = db.Collection("sales").InsertOne(ctx, older)
 	_, _ = db.Collection("sales").InsertOne(ctx, newer)
 
-	list, _ := s.ListByDate(ctx, shop, now.In(ictLoc).Format("2006-01-02"))
+	list, _ := s.ListByDate(ctx, shop, noon.Format("2006-01-02"))
 	if len(list) != 2 || list[0].Name != "newer" {
 		t.Errorf("expected newest first, got %+v", list)
 	}
