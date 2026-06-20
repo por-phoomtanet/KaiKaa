@@ -315,13 +315,15 @@ KaiKaa/
 - **DoD:** register แล้วได้ token · login ด้วย password ผิดได้ 401 · เรียก `/api/v1/...` โดยไม่มี token ได้ 401 · password ถูก hash (bcrypt) ไม่เก็บ plain text
   - ✅ **ผ่านครบ** — ทดสอบจริง: register 200, email ซ้ำ 409, login ผิด 401, login ถูก 200, /v1/me ไม่มี token 401, มี token 200, hash = `$2a$10$...` (bcrypt)
 
-### T03 · Products API
-- [ ] Data model: `Product`
-- [ ] `GET /api/v1/products` — ดึงสินค้าทั้งหมดของร้าน
-- [ ] `POST /api/v1/products` — เพิ่มสินค้าใหม่
-- [ ] `PUT /api/v1/products/:id` — แก้ไขสินค้า
-- [ ] `DELETE /api/v1/products/:id` — ลบสินค้า
+### T03 · Products API ✅ (verified)
+- [x] Data model: `Product` (`internal/product/model.go`)
+- [x] `GET /api/v1/products` — ดึงสินค้าทั้งหมดของร้าน
+- [x] `POST /api/v1/products` — เพิ่มสินค้าใหม่
+- [x] `PUT /api/v1/products/:id` — แก้ไขสินค้า
+- [x] `DELETE /api/v1/products/:id` — ลบสินค้า
+- [x] Go tests: CRUD + isolation per shop + cross-shop ErrNotFound (8 funcs)
 - **DoD:** CRUD ครบ คืน JSON ตรงตาม API Contract · เห็นเฉพาะสินค้าของ shop ตัวเอง (filter ด้วย shop_id จาก token) · แก้/ลบสินค้าร้านอื่นได้ 404
+  - ✅ **ผ่านครบ** — HTTP จริง: create/list/update/delete 200, list ร้านอื่น `[]`, update/delete ร้านอื่น 404, name ว่าง 400, ไม่มี token 401
 
 ### T04 · Sales API
 - [ ] Data model: `Sale`
@@ -473,7 +475,7 @@ KaiKaa/
 |----|-----|--------|-------|
 | T01 | Project Setup (Backend) | Backend | ✅ (รอ verify) |
 | T02 | Auth API | Backend | ✅ |
-| T03 | Products API | Backend | ⬜ |
+| T03 | Products API | Backend | ✅ |
 | T04 | Sales API | Backend | ⬜ |
 | T05 | Reports API | Backend | ⬜ |
 | T06 | AI Summary API | Backend | ⬜ |

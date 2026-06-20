@@ -8,6 +8,7 @@ import (
 	"github.com/kaikaa/api/config"
 	"github.com/kaikaa/api/internal/auth"
 	"github.com/kaikaa/api/internal/middleware"
+	"github.com/kaikaa/api/internal/product"
 	"github.com/kaikaa/api/internal/response"
 )
 
@@ -16,8 +17,8 @@ func main() {
 	db := config.ConnectMongo(cfg.MongoURI, cfg.MongoDB)
 
 	// wire dependencies (handler ← service ← db)
-	authService := auth.NewService(db, cfg.JWTSecret)
-	authHandler := auth.NewHandler(authService)
+	authHandler := auth.NewHandler(auth.NewService(db, cfg.JWTSecret))
+	productHandler := product.NewHandler(product.NewService(db))
 
 	r := gin.Default()
 
@@ -45,6 +46,12 @@ func main() {
 					"shop_id": c.GetString(middleware.CtxShopID),
 				})
 			})
+
+			// products (T03)
+			v1.GET("/products", productHandler.List)
+			v1.POST("/products", productHandler.Create)
+			v1.PUT("/products/:id", productHandler.Update)
+			v1.DELETE("/products/:id", productHandler.Delete)
 		}
 	}
 
