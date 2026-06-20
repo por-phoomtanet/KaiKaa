@@ -346,12 +346,15 @@ KaiKaa/
 - **DoD:** response ตรงตาม API Contract ทุก key · `week_bars` ครบ 7 วัน (เติม 0 วันที่ไม่มีขาย) · `cash_pct + transfer_pct = 100` · วันไม่มีข้อมูลคืนค่า 0 ไม่ใช่ error
   - ✅ **ผ่านครบ** — HTTP จริง: daily/monthly คืนทุก key, pct รวม 100, week_bars 7/4, วันว่าง zeros, date ผิด 400, no-token 401
 
-### T06 · AI Summary API
-- [ ] `POST /api/v1/ai/summary`
-  - รับข้อมูลยอดขายวันนี้ (จาก DB)
-  - ส่ง prompt ไปยัง openrouter
-  - คืนผล 3 ส่วน: สรุปยอด, สินค้าขายดี Top 3, คำแนะนำ 3 ข้อ
+### T06 · AI Summary API ✅ (verified)
+- [x] `POST /api/v1/ai/summary`
+  - รับข้อมูลยอดขายวันนี้ (จาก report service)
+  - ส่ง prompt ไปยัง openrouter (ผ่าน interface `Completer` → mock ได้)
+  - คืนผล 3 ส่วน: สรุปยอด (AI), สินค้าขายดี Top 3 (ข้อมูลจริง), คำแนะนำ 3 ข้อ (AI)
+- [x] Go tests: parseAIJSON (plain/fenced/none), happy path, LLM error, invalid date (6 funcs, mock LLM)
 - **DoD:** คืน JSON ตรง Contract (`summary`, `best_sellers`, `recommendations`) · ข้อความเป็นภาษาไทย · openrouter ล่ม/timeout คืน error ที่อ่านได้ ไม่ทำ server crash · ไม่ hardcode API key (อ่านจาก env)
+  - ✅ **ผ่านครบ** — unit test (mock) ยืนยัน structure + best_sellers จากข้อมูลจริง · HTTP จริง: ไม่มี key → 502 (server ไม่ crash, /health ยัง 200), date ผิด 400, no-token 401
+  - ⚠️ e2e กับ openrouter จริงต้องใส่ `OPENROUTER_KEY` ใน `.env` ก่อน (ยังไม่ได้ทดสอบกับ LLM จริง)
 
 ---
 
@@ -482,7 +485,7 @@ KaiKaa/
 | T03 | Products API | Backend | ✅ |
 | T04 | Sales API | Backend | ✅ |
 | T05 | Reports API | Backend | ✅ |
-| T06 | AI Summary API | Backend | ⬜ |
+| T06 | AI Summary API | Backend | ✅ |
 | T07 | Project Setup (Mobile) | Mobile | ⬜ |
 | T08 | Auth (Login / Register) | Mobile | ⬜ |
 | T09 | Bottom Navigation | Mobile | ⬜ |

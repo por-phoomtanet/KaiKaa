@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/kaikaa/api/config"
+	"github.com/kaikaa/api/internal/ai"
 	"github.com/kaikaa/api/internal/auth"
 	"github.com/kaikaa/api/internal/middleware"
 	"github.com/kaikaa/api/internal/product"
@@ -19,10 +20,13 @@ func main() {
 	db := config.ConnectMongo(cfg.MongoURI, cfg.MongoDB)
 
 	// wire dependencies (handler ← service ← db)
+	reportService := report.NewService(db)
+
 	authHandler := auth.NewHandler(auth.NewService(db, cfg.JWTSecret))
 	productHandler := product.NewHandler(product.NewService(db))
 	saleHandler := sale.NewHandler(sale.NewService(db))
-	reportHandler := report.NewHandler(report.NewService(db))
+	reportHandler := report.NewHandler(reportService)
+	aiHandler := ai.NewHandler(ai.NewService(reportService, ai.NewOpenRouterClient(cfg.OpenRouterKey, cfg.OpenRouterModel)))
 
 	r := gin.Default()
 
@@ -64,6 +68,9 @@ func main() {
 			// reports (T05)
 			v1.GET("/reports/daily", reportHandler.Daily)
 			v1.GET("/reports/monthly", reportHandler.Monthly)
+
+			// ai (T06)
+			v1.POST("/ai/summary", aiHandler.Summary)
 		}
 	}
 
