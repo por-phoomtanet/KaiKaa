@@ -12,9 +12,13 @@ dist/
 *.log
 
 # RN native build output
-apps/mobile/android/
-apps/mobile/ios/
+apps/mobile/android/.gradle/
+apps/mobile/android/build/
+apps/mobile/android/app/build/
+apps/mobile/android/local.properties
+apps/mobile/ios/build/
 *.keystore
+!apps/mobile/android/app/debug.keystore
 
 # ===== Go =====
 # compiled binaries (เจาะจง root binary ชื่อ server ไม่ให้โดนโฟลเดอร์ cmd/server)
